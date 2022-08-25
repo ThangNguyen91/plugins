@@ -13,15 +13,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Image Picker Demo',
       home: MyHomePage(title: 'Image Picker Example'),
     );
@@ -29,19 +27,19 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   List<XFile>? _imageFileList;
 
-  void _setImageFileListFromFile(XFile? value) {
-    _imageFileList = value == null ? null : <XFile>[value];
+  set _imageFile(XFile? value) {
+    _imageFileList = value == null ? null : [value];
   }
 
   dynamic _pickImageError;
@@ -71,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // Mute the video so it auto-plays in web!
       // This is not needed if the call to .play is the result of user
       // interaction (clicking on a "play" button, for example).
-      const double volume = kIsWeb ? 0.0 : 1.0;
+      final double volume = kIsWeb ? 0.0 : 1.0;
       await controller.setVolume(volume);
       await controller.initialize();
       await controller.setLooping(true);
@@ -80,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> _onImageButtonPressed(ImageSource source,
+  void _onImageButtonPressed(ImageSource source,
       {BuildContext? context, bool isMultiImage = false}) async {
     if (_controller != null) {
       await _controller!.setVolume(0.0);
@@ -93,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
       await _displayPickImageDialog(context!,
           (double? maxWidth, double? maxHeight, int? quality) async {
         try {
-          final List<XFile>? pickedFileList = await _picker.pickMultiImage(
+          final pickedFileList = await _picker.pickMultiImage(
             maxWidth: maxWidth,
             maxHeight: maxHeight,
             imageQuality: quality,
@@ -111,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
       await _displayPickImageDialog(context!,
           (double? maxWidth, double? maxHeight, int? quality) async {
         try {
-          final XFile? pickedFile = await _picker.pickImage(
+          final pickedFile = await _picker.pickImage(
             source: source,
             maxWidth: maxWidth,
             maxHeight: maxHeight,
             imageQuality: quality,
           );
           setState(() {
-            _setImageFileListFromFile(pickedFile);
+            _imageFile = pickedFile;
           });
         } catch (e) {
           setState(() {
@@ -179,22 +177,21 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     if (_imageFileList != null) {
       return Semantics(
-        label: 'image_picker_example_picked_images',
-        child: ListView.builder(
-          key: UniqueKey(),
-          itemBuilder: (BuildContext context, int index) {
-            // Why network for web?
-            // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
-            return Semantics(
-              label: 'image_picker_example_picked_image',
-              child: kIsWeb
-                  ? Image.network(_imageFileList![index].path)
-                  : Image.file(File(_imageFileList![index].path)),
-            );
-          },
-          itemCount: _imageFileList!.length,
-        ),
-      );
+          child: ListView.builder(
+            key: UniqueKey(),
+            itemBuilder: (context, index) {
+              // Why network for web?
+              // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+              return Semantics(
+                label: 'image_picker_example_picked_image',
+                child: kIsWeb
+                    ? Image.network(_imageFileList![index].path)
+                    : Image.file(File(_imageFileList![index].path)),
+              );
+            },
+            itemCount: _imageFileList!.length,
+          ),
+          label: 'image_picker_example_picked_images');
     } else if (_pickImageError != null) {
       return Text(
         'Pick image error: $_pickImageError',
@@ -228,11 +225,8 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         isVideo = false;
         setState(() {
-          if (response.files == null) {
-            _setImageFileListFromFile(response.file);
-          } else {
-            _imageFileList = response.files;
-          }
+          _imageFile = response.file;
+          _imageFileList = response.files;
         });
       }
     } else {
@@ -364,30 +358,28 @@ class _MyHomePageState extends State<MyHomePage> {
       BuildContext context, OnPickImageCallback onPick) async {
     return showDialog(
         context: context,
-        builder: (BuildContext context) {
+        builder: (context) {
           return AlertDialog(
-            title: const Text('Add optional parameters'),
+            title: Text('Add optional parameters'),
             content: Column(
               children: <Widget>[
                 TextField(
                   controller: maxWidthController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  decoration: const InputDecoration(
-                      hintText: 'Enter maxWidth if desired'),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration:
+                      InputDecoration(hintText: "Enter maxWidth if desired"),
                 ),
                 TextField(
                   controller: maxHeightController,
-                  keyboardType:
-                      const TextInputType.numberWithOptions(decimal: true),
-                  decoration: const InputDecoration(
-                      hintText: 'Enter maxHeight if desired'),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration:
+                      InputDecoration(hintText: "Enter maxHeight if desired"),
                 ),
                 TextField(
                   controller: qualityController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      hintText: 'Enter quality if desired'),
+                  decoration:
+                      InputDecoration(hintText: "Enter quality if desired"),
                 ),
               ],
             ),
@@ -401,13 +393,13 @@ class _MyHomePageState extends State<MyHomePage> {
               TextButton(
                   child: const Text('PICK'),
                   onPressed: () {
-                    final double? width = maxWidthController.text.isNotEmpty
+                    double? width = maxWidthController.text.isNotEmpty
                         ? double.parse(maxWidthController.text)
                         : null;
-                    final double? height = maxHeightController.text.isNotEmpty
+                    double? height = maxHeightController.text.isNotEmpty
                         ? double.parse(maxHeightController.text)
                         : null;
-                    final int? quality = qualityController.text.isNotEmpty
+                    int? quality = qualityController.text.isNotEmpty
                         ? int.parse(qualityController.text)
                         : null;
                     onPick(width, height, quality);
@@ -419,11 +411,11 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-typedef OnPickImageCallback = void Function(
+typedef void OnPickImageCallback(
     double? maxWidth, double? maxHeight, int? quality);
 
 class AspectRatioVideo extends StatefulWidget {
-  const AspectRatioVideo(this.controller, {Key? key}) : super(key: key);
+  AspectRatioVideo(this.controller);
 
   final VideoPlayerController? controller;
 

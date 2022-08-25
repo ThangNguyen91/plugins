@@ -11,10 +11,10 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 
-final String pathPrefix =
+final pathPrefix =
     Directory.current.path.endsWith('test') ? './assets/' : './test/assets/';
-final String path = '${pathPrefix}hello.txt';
-const String expectedStringContents = 'Hello, world!';
+final path = pathPrefix + 'hello.txt';
+final String expectedStringContents = 'Hello, world!';
 final Uint8List bytes = Uint8List.fromList(utf8.encode(expectedStringContents));
 final File textFile = File(path);
 final String textFilePath = textFile.path;

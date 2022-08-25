@@ -4,6 +4,7 @@
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:image_picker_platform_interface/src/method_channel/method_channel_image_picker.dart';
 
@@ -11,7 +12,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('$MethodChannelImagePicker', () {
-    final MethodChannelImagePicker picker = MethodChannelImagePicker();
+    MethodChannelImagePicker picker = MethodChannelImagePicker();
 
     final List<MethodCall> log = <MethodCall>[];
     dynamic returnValue = '';
@@ -39,16 +40,14 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 1,
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
           ],
         );
@@ -94,62 +93,55 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
           ],
         );
       });
 
-      test('does not accept an invalid imageQuality argument', () {
+      test('does not accept a invalid imageQuality argument', () {
         expect(
           () => picker.pickImage(imageQuality: -1, source: ImageSource.gallery),
           throwsArgumentError,
@@ -204,7 +196,6 @@ void main() {
               'maxHeight': null,
               'imageQuality': null,
               'cameraDevice': 0,
-              'requestFullMetadata': true,
             }),
           ],
         );
@@ -224,7 +215,6 @@ void main() {
               'maxHeight': null,
               'imageQuality': null,
               'cameraDevice': 1,
-              'requestFullMetadata': true,
             }),
           ],
         );
@@ -233,7 +223,7 @@ void main() {
 
     group('#pickMultiImage', () {
       test('calls the method correctly', () async {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         await picker.pickMultiImage();
 
         expect(
@@ -243,14 +233,13 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
           ],
         );
       });
 
       test('passes the width and height arguments correctly', () async {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         await picker.pickMultiImage();
         await picker.pickMultiImage(
           maxWidth: 10.0,
@@ -283,50 +272,43 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
           ],
         );
       });
 
       test('does not accept a negative width or height argument', () {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         expect(
           () => picker.pickMultiImage(maxWidth: -1.0),
           throwsArgumentError,
@@ -338,8 +320,8 @@ void main() {
         );
       });
 
-      test('does not accept an invalid imageQuality argument', () {
-        returnValue = <dynamic>['0', '1'];
+      test('does not accept a invalid imageQuality argument', () {
+        returnValue = ['0', '1'];
         expect(
           () => picker.pickMultiImage(imageQuality: -1),
           throwsArgumentError,
@@ -527,16 +509,14 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 1,
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
           ],
         );
@@ -582,62 +562,55 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
             isMethodCall('pickImage', arguments: <String, dynamic>{
               'source': 0,
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
+              'cameraDevice': 0
             }),
           ],
         );
       });
 
-      test('does not accept an invalid imageQuality argument', () {
+      test('does not accept a invalid imageQuality argument', () {
         expect(
           () => picker.getImage(imageQuality: -1, source: ImageSource.gallery),
           throwsArgumentError,
@@ -691,7 +664,6 @@ void main() {
               'maxHeight': null,
               'imageQuality': null,
               'cameraDevice': 0,
-              'requestFullMetadata': true,
             }),
           ],
         );
@@ -711,7 +683,6 @@ void main() {
               'maxHeight': null,
               'imageQuality': null,
               'cameraDevice': 1,
-              'requestFullMetadata': true,
             }),
           ],
         );
@@ -720,7 +691,7 @@ void main() {
 
     group('#getMultiImage', () {
       test('calls the method correctly', () async {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         await picker.getMultiImage();
 
         expect(
@@ -730,14 +701,13 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
           ],
         );
       });
 
       test('passes the width and height arguments correctly', () async {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         await picker.getMultiImage();
         await picker.getMultiImage(
           maxWidth: 10.0,
@@ -770,50 +740,43 @@ void main() {
               'maxWidth': null,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': null,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': null,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': null,
               'maxHeight': 10.0,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
             isMethodCall('pickMultiImage', arguments: <String, dynamic>{
               'maxWidth': 10.0,
               'maxHeight': 20.0,
               'imageQuality': 70,
-              'requestFullMetadata': true,
             }),
           ],
         );
       });
 
       test('does not accept a negative width or height argument', () {
-        returnValue = <dynamic>['0', '1'];
+        returnValue = ['0', '1'];
         expect(
           () => picker.getMultiImage(maxWidth: -1.0),
           throwsArgumentError,
@@ -825,8 +788,8 @@ void main() {
         );
       });
 
-      test('does not accept an invalid imageQuality argument', () {
-        returnValue = <dynamic>['0', '1'];
+      test('does not accept a invalid imageQuality argument', () {
+        returnValue = ['0', '1'];
         expect(
           () => picker.getMultiImage(imageQuality: -1),
           throwsArgumentError,
@@ -971,7 +934,7 @@ void main() {
           return <String, dynamic>{
             'type': 'image',
             'path': '/example/path1',
-            'pathList': <dynamic>['/example/path0', '/example/path1'],
+            'pathList': ['/example/path0', '/example/path1'],
           };
         });
         final LostDataResponse response = await picker.getLostData();
@@ -1014,466 +977,6 @@ void main() {
           };
         });
         expect(picker.getLostData(), throwsAssertionError);
-      });
-    });
-
-    group('#getImageFromSource', () {
-      test('passes the image source argument correctly', () async {
-        await picker.getImageFromSource(source: ImageSource.camera);
-        await picker.getImageFromSource(source: ImageSource.gallery);
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 1,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('passes the width and height arguments correctly', () async {
-        await picker.getImageFromSource(source: ImageSource.camera);
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(maxWidth: 10.0),
-        );
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(maxHeight: 10.0),
-        );
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(
-            maxWidth: 10.0,
-            maxHeight: 20.0,
-          ),
-        );
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(
-            maxWidth: 10.0,
-            imageQuality: 70,
-          ),
-        );
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(
-            maxHeight: 10.0,
-            imageQuality: 70,
-          ),
-        );
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(
-            maxWidth: 10.0,
-            maxHeight: 20.0,
-            imageQuality: 70,
-          ),
-        );
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': 10.0,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': 10.0,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': 10.0,
-              'maxHeight': 20.0,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': 10.0,
-              'maxHeight': null,
-              'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': 10.0,
-              'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': 10.0,
-              'maxHeight': 20.0,
-              'imageQuality': 70,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('does not accept an invalid imageQuality argument', () {
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.gallery,
-            options: const ImagePickerOptions(imageQuality: -1),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.gallery,
-            options: const ImagePickerOptions(imageQuality: 101),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.camera,
-            options: const ImagePickerOptions(imageQuality: -1),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.camera,
-            options: const ImagePickerOptions(imageQuality: 101),
-          ),
-          throwsArgumentError,
-        );
-      });
-
-      test('does not accept a negative width or height argument', () {
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.camera,
-            options: const ImagePickerOptions(maxWidth: -1.0),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getImageFromSource(
-            source: ImageSource.camera,
-            options: const ImagePickerOptions(maxHeight: -1.0),
-          ),
-          throwsArgumentError,
-        );
-      });
-
-      test('handles a null image path response gracefully', () async {
-        picker.channel
-            .setMockMethodCallHandler((MethodCall methodCall) => null);
-
-        expect(await picker.getImageFromSource(source: ImageSource.gallery),
-            isNull);
-        expect(await picker.getImageFromSource(source: ImageSource.camera),
-            isNull);
-      });
-
-      test('camera position defaults to back', () async {
-        await picker.getImageFromSource(source: ImageSource.camera);
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('camera position can set to front', () async {
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(
-            preferredCameraDevice: CameraDevice.front,
-          ),
-        );
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 1,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('passes the full metadata argument correctly', () async {
-        await picker.getImageFromSource(
-          source: ImageSource.camera,
-          options: const ImagePickerOptions(requestFullMetadata: false),
-        );
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickImage', arguments: <String, dynamic>{
-              'source': 0,
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'cameraDevice': 0,
-              'requestFullMetadata': false,
-            }),
-          ],
-        );
-      });
-    });
-
-    group('#getMultiImageWithOptions', () {
-      test('calls the method correctly', () async {
-        returnValue = <dynamic>['0', '1'];
-        await picker.getMultiImageWithOptions();
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('passes the width, height and imageQuality arguments correctly',
-          () async {
-        returnValue = <dynamic>['0', '1'];
-        await picker.getMultiImageWithOptions();
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(maxWidth: 10.0),
-          ),
-        );
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(maxHeight: 10.0),
-          ),
-        );
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(
-              maxWidth: 10.0,
-              maxHeight: 20.0,
-            ),
-          ),
-        );
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(
-              maxWidth: 10.0,
-              imageQuality: 70,
-            ),
-          ),
-        );
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(
-              maxHeight: 10.0,
-              imageQuality: 70,
-            ),
-          ),
-        );
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(
-              maxWidth: 10.0,
-              maxHeight: 20.0,
-              imageQuality: 70,
-            ),
-          ),
-        );
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': 10.0,
-              'maxHeight': null,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': 10.0,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': 10.0,
-              'maxHeight': 20.0,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': 10.0,
-              'maxHeight': null,
-              'imageQuality': 70,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': 10.0,
-              'imageQuality': 70,
-              'requestFullMetadata': true,
-            }),
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': 10.0,
-              'maxHeight': 20.0,
-              'imageQuality': 70,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('does not accept a negative width or height argument', () {
-        returnValue = <dynamic>['0', '1'];
-        expect(
-          () => picker.getMultiImageWithOptions(
-            options: const MultiImagePickerOptions(
-              imageOptions: ImageOptions(maxWidth: -1.0),
-            ),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getMultiImageWithOptions(
-            options: const MultiImagePickerOptions(
-              imageOptions: ImageOptions(maxHeight: -1.0),
-            ),
-          ),
-          throwsArgumentError,
-        );
-      });
-
-      test('does not accept an invalid imageQuality argument', () {
-        returnValue = <dynamic>['0', '1'];
-        expect(
-          () => picker.getMultiImageWithOptions(
-            options: const MultiImagePickerOptions(
-              imageOptions: ImageOptions(imageQuality: -1),
-            ),
-          ),
-          throwsArgumentError,
-        );
-
-        expect(
-          () => picker.getMultiImageWithOptions(
-            options: const MultiImagePickerOptions(
-              imageOptions: ImageOptions(imageQuality: 101),
-            ),
-          ),
-          throwsArgumentError,
-        );
-      });
-
-      test('handles a null image path response gracefully', () async {
-        picker.channel
-            .setMockMethodCallHandler((MethodCall methodCall) => null);
-
-        expect(await picker.getMultiImage(), isNull);
-        expect(await picker.getMultiImage(), isNull);
-      });
-
-      test('Request full metadata argument defaults to true', () async {
-        returnValue = <dynamic>['0', '1'];
-        await picker.getMultiImageWithOptions();
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'requestFullMetadata': true,
-            }),
-          ],
-        );
-      });
-
-      test('passes the request full metadata argument correctly', () async {
-        returnValue = <dynamic>['0', '1'];
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(
-            imageOptions: ImageOptions(requestFullMetadata: false),
-          ),
-        );
-
-        expect(
-          log,
-          <Matcher>[
-            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-              'maxWidth': null,
-              'maxHeight': null,
-              'imageQuality': null,
-              'requestFullMetadata': false,
-            }),
-          ],
-        );
       });
     });
   });

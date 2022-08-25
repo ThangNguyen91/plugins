@@ -5,7 +5,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart' show immutable;
+import 'package:meta/meta.dart';
 
 /// The interface for a PickedFile.
 ///
@@ -18,8 +18,7 @@ import 'package:flutter/foundation.dart' show immutable;
 @immutable
 abstract class PickedFileBase {
   /// Construct a PickedFile
-  // ignore: avoid_unused_constructor_parameters
-  const PickedFileBase(String path);
+  PickedFileBase(String path);
 
   /// Get the path of the picked file.
   ///
