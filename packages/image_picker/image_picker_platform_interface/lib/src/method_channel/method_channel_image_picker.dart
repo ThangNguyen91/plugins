@@ -8,7 +8,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
-import 'package:image_picker_platform_interface/src/types/multi_image_picker_options.dart';
 
 const MethodChannel _channel = MethodChannel('plugins.flutter.io/image_picker');
 
@@ -150,7 +149,7 @@ class MethodChannelImagePicker extends ImagePickerPlatform {
   @override
   Future<LostData> retrieveLostData() async {
     final Map<String, dynamic>? result =
-    await _channel.invokeMapMethod<String, dynamic>('retrieve');
+        await _channel.invokeMapMethod<String, dynamic>('retrieve');
 
     if (result == null) {
       return LostData.empty();
@@ -272,7 +271,7 @@ class MethodChannelImagePicker extends ImagePickerPlatform {
     List<XFile>? pickedFileList;
 
     final Map<String, dynamic>? result =
-    await _channel.invokeMapMethod<String, dynamic>('retrieve');
+        await _channel.invokeMapMethod<String, dynamic>('retrieve');
 
     if (result == null) {
       return LostDataResponse.empty();
@@ -300,7 +299,7 @@ class MethodChannelImagePicker extends ImagePickerPlatform {
     final String? path = result['path'] as String?;
 
     final List<String>? pathList =
-    (result['pathList'] as List<dynamic>?)?.cast<String>();
+        (result['pathList'] as List<dynamic>?)?.cast<String>();
     if (pathList != null) {
       pickedFileList = <XFile>[];
       for (final String path in pathList) {

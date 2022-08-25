@@ -4,11 +4,8 @@
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:image_picker_platform_interface/image_picker_platform_interface.dart';
 import 'package:image_picker_platform_interface/src/method_channel/method_channel_image_picker.dart';
-import 'package:image_picker_platform_interface/src/types/image_options.dart';
-import 'package:image_picker_platform_interface/src/types/multi_image_picker_options.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -154,35 +151,35 @@ void main() {
 
       test('does not accept an invalid imageQuality argument', () {
         expect(
-              () => picker.pickImage(imageQuality: -1, source: ImageSource.gallery),
+          () => picker.pickImage(imageQuality: -1, source: ImageSource.gallery),
           throwsArgumentError,
         );
 
         expect(
-              () =>
+          () =>
               picker.pickImage(imageQuality: 101, source: ImageSource.gallery),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.pickImage(imageQuality: -1, source: ImageSource.camera),
+          () => picker.pickImage(imageQuality: -1, source: ImageSource.camera),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.pickImage(imageQuality: 101, source: ImageSource.camera),
+          () => picker.pickImage(imageQuality: 101, source: ImageSource.camera),
           throwsArgumentError,
         );
       });
 
       test('does not accept a negative width or height argument', () {
         expect(
-              () => picker.pickImage(source: ImageSource.camera, maxWidth: -1.0),
+          () => picker.pickImage(source: ImageSource.camera, maxWidth: -1.0),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.pickImage(source: ImageSource.camera, maxHeight: -1.0),
+          () => picker.pickImage(source: ImageSource.camera, maxHeight: -1.0),
           throwsArgumentError,
         );
       });
@@ -331,12 +328,12 @@ void main() {
       test('does not accept a negative width or height argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.pickMultiImage(maxWidth: -1.0),
+          () => picker.pickMultiImage(maxWidth: -1.0),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.pickMultiImage(maxHeight: -1.0),
+          () => picker.pickMultiImage(maxHeight: -1.0),
           throwsArgumentError,
         );
       });
@@ -344,12 +341,12 @@ void main() {
       test('does not accept an invalid imageQuality argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.pickMultiImage(imageQuality: -1),
+          () => picker.pickMultiImage(imageQuality: -1),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.pickMultiImage(imageQuality: 101),
+          () => picker.pickMultiImage(imageQuality: 101),
           throwsArgumentError,
         );
       });
@@ -642,34 +639,34 @@ void main() {
 
       test('does not accept an invalid imageQuality argument', () {
         expect(
-              () => picker.getImage(imageQuality: -1, source: ImageSource.gallery),
+          () => picker.getImage(imageQuality: -1, source: ImageSource.gallery),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getImage(imageQuality: 101, source: ImageSource.gallery),
+          () => picker.getImage(imageQuality: 101, source: ImageSource.gallery),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getImage(imageQuality: -1, source: ImageSource.camera),
+          () => picker.getImage(imageQuality: -1, source: ImageSource.camera),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getImage(imageQuality: 101, source: ImageSource.camera),
+          () => picker.getImage(imageQuality: 101, source: ImageSource.camera),
           throwsArgumentError,
         );
       });
 
       test('does not accept a negative width or height argument', () {
         expect(
-              () => picker.getImage(source: ImageSource.camera, maxWidth: -1.0),
+          () => picker.getImage(source: ImageSource.camera, maxWidth: -1.0),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getImage(source: ImageSource.camera, maxHeight: -1.0),
+          () => picker.getImage(source: ImageSource.camera, maxHeight: -1.0),
           throwsArgumentError,
         );
       });
@@ -818,12 +815,12 @@ void main() {
       test('does not accept a negative width or height argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.getMultiImage(maxWidth: -1.0),
+          () => picker.getMultiImage(maxWidth: -1.0),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getMultiImage(maxHeight: -1.0),
+          () => picker.getMultiImage(maxHeight: -1.0),
           throwsArgumentError,
         );
       });
@@ -831,12 +828,12 @@ void main() {
       test('does not accept an invalid imageQuality argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.getMultiImage(imageQuality: -1),
+          () => picker.getMultiImage(imageQuality: -1),
           throwsArgumentError,
         );
 
         expect(
-              () => picker.getMultiImage(imageQuality: 101),
+          () => picker.getMultiImage(imageQuality: 101),
           throwsArgumentError,
         );
       });
@@ -1153,7 +1150,7 @@ void main() {
 
       test('does not accept an invalid imageQuality argument', () {
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.gallery,
             options: const ImagePickerOptions(imageQuality: -1),
           ),
@@ -1161,7 +1158,7 @@ void main() {
         );
 
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.gallery,
             options: const ImagePickerOptions(imageQuality: 101),
           ),
@@ -1169,7 +1166,7 @@ void main() {
         );
 
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.camera,
             options: const ImagePickerOptions(imageQuality: -1),
           ),
@@ -1177,7 +1174,7 @@ void main() {
         );
 
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.camera,
             options: const ImagePickerOptions(imageQuality: 101),
           ),
@@ -1187,7 +1184,7 @@ void main() {
 
       test('does not accept a negative width or height argument', () {
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.camera,
             options: const ImagePickerOptions(maxWidth: -1.0),
           ),
@@ -1195,7 +1192,7 @@ void main() {
         );
 
         expect(
-              () => picker.getImageFromSource(
+          () => picker.getImageFromSource(
             source: ImageSource.camera,
             options: const ImagePickerOptions(maxHeight: -1.0),
           ),
@@ -1295,106 +1292,106 @@ void main() {
       });
 
       test('passes the width, height and imageQuality arguments correctly',
-              () async {
-            returnValue = <dynamic>['0', '1'];
-            await picker.getMultiImageWithOptions();
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(maxWidth: 10.0),
-              ),
-            );
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(maxHeight: 10.0),
-              ),
-            );
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(
-                  maxWidth: 10.0,
-                  maxHeight: 20.0,
-                ),
-              ),
-            );
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(
-                  maxWidth: 10.0,
-                  imageQuality: 70,
-                ),
-              ),
-            );
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(
-                  maxHeight: 10.0,
-                  imageQuality: 70,
-                ),
-              ),
-            );
-            await picker.getMultiImageWithOptions(
-              options: const MultiImagePickerOptions(
-                imageOptions: ImageOptions(
-                  maxWidth: 10.0,
-                  maxHeight: 20.0,
-                  imageQuality: 70,
-                ),
-              ),
-            );
+          () async {
+        returnValue = <dynamic>['0', '1'];
+        await picker.getMultiImageWithOptions();
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(maxWidth: 10.0),
+          ),
+        );
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(maxHeight: 10.0),
+          ),
+        );
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(
+              maxWidth: 10.0,
+              maxHeight: 20.0,
+            ),
+          ),
+        );
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(
+              maxWidth: 10.0,
+              imageQuality: 70,
+            ),
+          ),
+        );
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(
+              maxHeight: 10.0,
+              imageQuality: 70,
+            ),
+          ),
+        );
+        await picker.getMultiImageWithOptions(
+          options: const MultiImagePickerOptions(
+            imageOptions: ImageOptions(
+              maxWidth: 10.0,
+              maxHeight: 20.0,
+              imageQuality: 70,
+            ),
+          ),
+        );
 
-            expect(
-              log,
-              <Matcher>[
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': null,
-                  'maxHeight': null,
-                  'imageQuality': null,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': 10.0,
-                  'maxHeight': null,
-                  'imageQuality': null,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': null,
-                  'maxHeight': 10.0,
-                  'imageQuality': null,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': 10.0,
-                  'maxHeight': 20.0,
-                  'imageQuality': null,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': 10.0,
-                  'maxHeight': null,
-                  'imageQuality': 70,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': null,
-                  'maxHeight': 10.0,
-                  'imageQuality': 70,
-                  'requestFullMetadata': true,
-                }),
-                isMethodCall('pickMultiImage', arguments: <String, dynamic>{
-                  'maxWidth': 10.0,
-                  'maxHeight': 20.0,
-                  'imageQuality': 70,
-                  'requestFullMetadata': true,
-                }),
-              ],
-            );
-          });
+        expect(
+          log,
+          <Matcher>[
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': null,
+              'maxHeight': null,
+              'imageQuality': null,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': 10.0,
+              'maxHeight': null,
+              'imageQuality': null,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': null,
+              'maxHeight': 10.0,
+              'imageQuality': null,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': 10.0,
+              'maxHeight': 20.0,
+              'imageQuality': null,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': 10.0,
+              'maxHeight': null,
+              'imageQuality': 70,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': null,
+              'maxHeight': 10.0,
+              'imageQuality': 70,
+              'requestFullMetadata': true,
+            }),
+            isMethodCall('pickMultiImage', arguments: <String, dynamic>{
+              'maxWidth': 10.0,
+              'maxHeight': 20.0,
+              'imageQuality': 70,
+              'requestFullMetadata': true,
+            }),
+          ],
+        );
+      });
 
       test('does not accept a negative width or height argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.getMultiImageWithOptions(
+          () => picker.getMultiImageWithOptions(
             options: const MultiImagePickerOptions(
               imageOptions: ImageOptions(maxWidth: -1.0),
             ),
@@ -1403,7 +1400,7 @@ void main() {
         );
 
         expect(
-              () => picker.getMultiImageWithOptions(
+          () => picker.getMultiImageWithOptions(
             options: const MultiImagePickerOptions(
               imageOptions: ImageOptions(maxHeight: -1.0),
             ),
@@ -1415,7 +1412,7 @@ void main() {
       test('does not accept an invalid imageQuality argument', () {
         returnValue = <dynamic>['0', '1'];
         expect(
-              () => picker.getMultiImageWithOptions(
+          () => picker.getMultiImageWithOptions(
             options: const MultiImagePickerOptions(
               imageOptions: ImageOptions(imageQuality: -1),
             ),
@@ -1424,7 +1421,7 @@ void main() {
         );
 
         expect(
-              () => picker.getMultiImageWithOptions(
+          () => picker.getMultiImageWithOptions(
             options: const MultiImagePickerOptions(
               imageOptions: ImageOptions(imageQuality: 101),
             ),
@@ -1443,9 +1440,7 @@ void main() {
 
       test('Request full metadata argument defaults to true', () async {
         returnValue = <dynamic>['0', '1'];
-        await picker.getMultiImageWithOptions(
-          options: const MultiImagePickerOptions(),
-        );
+        await picker.getMultiImageWithOptions();
 
         expect(
           log,
